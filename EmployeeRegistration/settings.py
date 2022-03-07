@@ -39,13 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'EmployeeApp.apps.EmployeeappConfig',
-    'reat_framework'
+    'rest_framework'
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True,
+CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleWare'
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -73,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'EmployeeRegistration.wsgi.application'
+# WSGI_APPLICATION = 'EmployeeRegistration.wsgi.application'
 
 
 # Database
