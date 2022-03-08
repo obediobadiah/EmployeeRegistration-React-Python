@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
 
-function Home() {
+function Employee() {
     return (
         <div className='Home_container'>
-
+            <h1>This is Employees page</h1>
         </div>
     )
 }
 
-export default Home;
+export default Employee;

@@ -1,0 +1,7 @@
+.Navigation_container .nav_link{
+    font-weight: bold;
+    text-decoration: none;
+}
+.Navigation_container .nav_link:hover{
+    background-color: rgb(255, 255, 255);
+}
