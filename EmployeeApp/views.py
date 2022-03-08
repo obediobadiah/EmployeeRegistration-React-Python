@@ -1,4 +1,6 @@
+from email.policy import default
 import json
+from msilib.schema import File
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
@@ -6,6 +8,8 @@ from django.http.response import JsonResponse
 
 from EmployeeApp.models import Departements, Employees
 from EmployeeApp.serializers import DepartementSerializer, EmployeeSerializer
+
+from django.core.files.storage import default_storage
 
 @csrf_exempt
 def DepartementApi(request, id=0):
@@ -51,16 +55,16 @@ def EmployeeApi(request, id=0):
 
     elif request.method == 'POST':
         employees_data = JSONParser().parse(request)
-        employee_serializer = DepartementSerializer(data=employees_data)
+        employee_serializer = EmployeeSerializer(data=employees_data)
         if employee_serializer.is_valid():
             employee_serializer.save()
-            return JsonResponse('Added successfully', safe = False)
+            return JsonResponse('Data saved', safe = False)
         return JsonResponse('Failed to save', safe = False)
     
 
     elif request.method == 'PUT':
         employees_data = JSONParser().parse(request)
-        employee = Departements.objects.get(EmployeeId = employees_data['EmployeeId'])
+        employee = Employees.objects.get(EmployeeId = employees_data['EmployeeId'])
         employee_serializer = EmployeeSerializer(employee, data=employees_data)
         if employee_serializer.is_valid():
             employee_serializer.save()
@@ -75,5 +79,11 @@ def EmployeeApi(request, id=0):
 
 
 
+@csrf_exempt
+def SaveFile(request):
+    file = request.FILES['myFile']
+    file_name = default_storage.save(file.name, file)
+
+    return JsonResponse(file_name, safe = False)
 
 # Create your views here.
